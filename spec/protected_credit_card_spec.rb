@@ -8,6 +8,21 @@ describe Braspag::ProtectedCreditCard do
   before do
     @connection = mock(:merchant_id => merchant_id, :protected_card_url => 'https://www.cartaoprotegido.com.br/Services/TestEnvironment', :homologation? => false)
     Braspag::Connection.stub(:instance => @connection)
+    Braspag.proxy_address = nil
+  end
+  context "savon_client with proxy addres set" do
+    let (:savon_double) {double('Savon')}
+    before do
+      @http = double("HTTP")
+      Savon::Client.stub(:new).and_return savon_double
+      savon_double.stub(:http).and_return @http
+      Braspag.proxy_address = "http://some.proxy.com:3444"
+    end
+    it "should set the http proxy" do
+      @http.should_receive(:proxy=).with "http://some.proxy.com:3444"
+
+      Braspag::ProtectedCreditCard.savon_client("url")
+    end
   end
 
   describe ".save" do
@@ -67,6 +82,7 @@ describe Braspag::ProtectedCreditCard do
           :success => true
         }
       end
+
     end
 
     context "with invalid params" do
