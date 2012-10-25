@@ -151,6 +151,9 @@ describe Braspag::ProtectedCreditCard do
       EOXML
     end
 
+    before do
+      Braspag.logger.stub(:info)
+    end
     it "should raise an error when just click key is not valid" do
       Braspag::ProtectedCreditCard.should_receive(:valid_just_click_key?)
                          .with("bla")

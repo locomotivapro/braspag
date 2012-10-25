@@ -8,12 +8,11 @@ module Braspag
 
       raise InvalidOrderId unless Braspag::PaymentMethod.valid_order_id?(order_id)
 
-      request = ::HTTPI::Request.new(self.status_url)
-      request.body = {
+      data = {
         :loja => connection.merchant_id, :numeroPedido => order_id.to_s
       }
 
-      response = ::HTTPI.post(request)
+      response = Braspag::Poster.new(self.status_url).do_post(:order_status, data)
 
       response = Utils::convert_to_map(response.body, {
         :authorization => "CodigoAutorizacao",

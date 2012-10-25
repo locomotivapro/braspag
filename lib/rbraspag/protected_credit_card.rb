@@ -58,10 +58,7 @@ module Braspag
 
       data = { 'getCreditCardRequestWS' => {:loja => connection.merchant_id, :justClickKey => just_click_key} }
 
-      request = ::HTTPI::Request.new(self.get_protected_card_url)
-      request.body = { 'getCreditCardRequestWS' => {:loja => connection.merchant_id, :justClickKey => just_click_key} }
-
-      response = ::HTTPI.post(request)
+      response = Braspag::Poster.new(self.get_protected_card_url).do_post(:get_protected_card, data)
 
       response = Utils::convert_to_map(response.body, {
           :holder => "CardHolder",
