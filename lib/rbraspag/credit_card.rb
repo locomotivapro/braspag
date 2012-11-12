@@ -13,11 +13,12 @@ module Braspag
       :expiration => "expiration",
       :security_code => "securityCode",
       :number_payments => "numberPayments",
-      :type => "typePayment",
+      :type => "typePayment"
     }
 
     AUTHORIZE_URI = "/webservices/pagador/Pagador.asmx/Authorize"
     CAPTURE_URI = "/webservices/pagador/Pagador.asmx/Capture"
+    PARTIAL_CAPTURE_URI = "/webservices/pagador/Pagador.asmx/CapturePartial"
     CANCELLATION_URI = "/webservices/pagador/Pagador.asmx/VoidTransaction"
     PRODUCTION_INFO_URI   = "/webservices/pagador/pedido.asmx/GetDadosCartao"
     HOMOLOGATION_INFO_URI = "/pagador/webservice/pedido.asmx/GetDadosCartao"
@@ -64,6 +65,30 @@ module Braspag
       }
 
       response = Braspag::Poster.new(self.capture_url).do_post(:capture, data)
+
+      Utils::convert_to_map(response.body, {
+          :amount => nil,
+          :number => "authorisationNumber",
+          :message => 'message',
+          :return_code => 'returnCode',
+          :status => 'status',
+          :transaction_id => "transactionId"
+        })
+    end
+
+    def self.partial_capture(order_id, amount)
+      connection = Braspag::Connection.instance
+      merchant_id = connection.merchant_id
+
+      raise InvalidOrderId unless self.valid_order_id?(order_id)
+
+      data = {
+        MAPPING[:order_id] => order_id,
+        MAPPING[:merchant_id] => merchant_id,
+        "captureAmount" => amount
+      }
+
+      response = Braspag::Poster.new(self.partial_capture_url).do_post(:partial_capture, data)
 
       Utils::convert_to_map(response.body, {
           :amount => nil,
@@ -172,6 +197,10 @@ module Braspag
 
     def self.capture_url
       Braspag::Connection.instance.braspag_url + CAPTURE_URI
+    end
+
+    def self.partial_capture_url
+      Braspag::Connection.instance.braspag_url + PARTIAL_CAPTURE_URI
     end
 
     def self.cancellation_url

@@ -161,6 +161,76 @@ describe Braspag::CreditCard do
     end
   end
 
+  describe ".partial_capture" do
+    let(:partial_capture_url) { "http://foo.bar/bar/partial" }
+    let(:order_id) { "um id qualquer" }
+
+    before do
+      @connection.should_receive(:merchant_id)
+    end
+
+    context "invalid order id" do
+      it "should raise an error" do
+        Braspag::CreditCard.should_receive(:valid_order_id?)
+                           .with(order_id)
+                           .and_return(false)
+
+        expect {
+          Braspag::CreditCard.partial_capture(order_id, 10.0)
+        }.to raise_error(Braspag::InvalidOrderId)
+      end
+    end
+
+    context "valid order id" do
+      let(:valid_xml) do
+        <<-EOXML
+          <?xml version="1.0" encoding="utf-8"?>
+          <PagadorReturn xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                         xmlns="https://www.pagador.com.br/webservice/pagador">
+            <amount>2</amount>
+            <message>Approved</message>
+            <returnCode>0</returnCode>
+            <status>0</status>
+          </PagadorReturn>
+        EOXML
+      end
+
+      let(:request) { OpenStruct.new :url => partial_capture_url }
+
+      before do
+        Braspag::CreditCard.should_receive(:partial_capture_url)
+                           .and_return(partial_capture_url)
+
+        ::HTTPI::Request.should_receive(:new)
+                        .with(partial_capture_url)
+                        .and_return(request)
+
+        ::HTTPI.should_receive(:post)
+               .with(request)
+               .and_return(mock(:body => valid_xml))
+      end
+
+      it "should return a Hash" do
+        response = Braspag::CreditCard.partial_capture("order id qualquer", 10.0)
+        response.should be_kind_of Hash
+        response.should == {
+          :amount => "2",
+          :number => nil,
+          :message => "Approved",
+          :return_code => "0",
+          :status => "0",
+          :transaction_id => nil
+        }
+      end
+
+      it "should post capture info" do
+        Braspag::CreditCard.partial_capture("order id qualquer", 10.0)
+        request.body.should == {"orderId"=>"order id qualquer", "captureAmount"=>10.0, "merchantId"=>"um id qualquer"}
+      end
+    end
+  end
+
   describe ".void" do
     let(:cancellation_url) { "http://foo.bar/bar/baz" }
     let(:order_id) { "um id qualquer" }
