@@ -226,7 +226,7 @@ describe Braspag::CreditCard do
 
       it "should post capture info" do
         Braspag::CreditCard.partial_capture("order id qualquer", 10.0)
-        request.body.should == {"orderId"=>"order id qualquer", "captureAmount"=>10.0, "merchantId"=>"um id qualquer"}
+        request.body.should == {"orderId"=>"order id qualquer", "captureAmount"=>"10,00", "merchantId"=>"um id qualquer"}
       end
     end
   end

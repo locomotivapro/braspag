@@ -86,6 +86,8 @@ module Braspag
         case k
         when :payment_method
           data['justClickShopRequestWS'][v] = Braspag::Connection.instance.homologation? ? PAYMENT_METHODS[:braspag] : PAYMENT_METHODS[params[:payment_method]]
+        when :amount
+          data['justClickShopRequestWS'][v] = ("%.2f" % params[k].to_f).gsub('.', '')
         else
           data['justClickShopRequestWS'][v] = params[k] || ""
         end

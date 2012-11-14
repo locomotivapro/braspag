@@ -256,7 +256,7 @@ describe Braspag::ProtectedCreditCard do
 
       it "should have Amount" do
         described_class.just_click_shop(params)
-        @savon_client_test.soap.body['justClickShopRequestWS']['Amount'].should eq 10.50
+        @savon_client_test.soap.body['justClickShopRequestWS']['Amount'].should eq "1050"
       end
 
       it "should have PaymentMethod" do

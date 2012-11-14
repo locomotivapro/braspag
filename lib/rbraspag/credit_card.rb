@@ -85,7 +85,7 @@ module Braspag
       data = {
         MAPPING[:order_id] => order_id,
         MAPPING[:merchant_id] => merchant_id,
-        "captureAmount" => amount
+        "captureAmount" => Utils.convert_decimal_to_string(amount)
       }
 
       response = Braspag::Poster.new(self.partial_capture_url).do_post(:partial_capture, data)
