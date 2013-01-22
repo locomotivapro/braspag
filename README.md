@@ -1,6 +1,6 @@
-# rBraspag
+# Baby Braspag
 
-rbraspag gem to use Braspag gateway
+baby-braspag gem to use Braspag gateway
 
 * This gem need RACK_ENV environment variable to identify the environment
 
@@ -10,7 +10,7 @@ rbraspag gem to use Braspag gateway
 
 ### Add on your Gemfile
 
-	gem "rbraspag"
+	gem "baby-braspag"
 
 ### Create a config/braspag.yml file
 
