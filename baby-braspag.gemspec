@@ -1,17 +1,17 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "rbraspag/version"
+require "baby-braspag/version"
 
 Gem::Specification.new do |s|
-  s.name        = "rbraspag"
+  s.name        = "baby-braspag"
   s.version     = Braspag::VERSION
-  s.authors     = ["Celestino Gomes", "Renato Elias", "Luca Bastos", "Lenon Marcel", "Madson Cardoso", "Marcelo Linhares"]
-  s.email       = %w[tinorj@gmail.com renato.elias@gmail.com lucabastos@gmail.com lenon.marcel@gmail.com madsonmac@gmail.com marcelolinhares@gmail.com]
-  s.homepage    = "http://github.com/concretesolutions/rbraspag"
-  s.summary     = "rbraspag gem to use Braspag gateway"
-  s.description = "rbraspag gem to use Braspag gateway"
+  s.authors     = ["baby dev"]
+  s.email       = %w["dev-team@baby.com.br"]
+  s.homepage    = "https://github.com/Baby-com-br/braspag"
+  s.summary     = "baby braspag gem to use Braspag gateway"
+  s.description = "baby braspag gem to use Braspag gateway"
 
-  s.rubyforge_project = "rbraspag"
+  s.rubyforge_project = "baby-braspag"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
