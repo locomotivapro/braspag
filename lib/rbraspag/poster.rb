@@ -27,7 +27,7 @@ module Braspag
     end
 
     def mask_data(data)
-      copy_data = data.dup
+      copy_data = Rack::Utils.parse_nested_query(data)
       copy_data['cardNumber'] = "************%s" % copy_data['cardNumber'][-4..-1] if copy_data['cardNumber']
       copy_data['securityCode'] = "***" if copy_data['securityCode']
       copy_data
