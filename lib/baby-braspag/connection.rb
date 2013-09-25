@@ -29,12 +29,12 @@ module Braspag
     def default_env_configuration
       {
         :pagador => {
-          "production"   => "https://transaction.pagador.com.br",
-          "homologation" => "https://homologacao.pagador.com.br"
+          "production"   => PRODUCTION_URL,
+          "homologation" => HOMOLOGATION_URL
         },
         :protected_card  => {
-          "production"   => "https://cartaoprotegido.braspag.com.br/Services",
-          "homologation" => "https://homologacao.braspag.com.br/services/testenvironment"
+          "production"   => PROTECTED_CARD_PRODUCTION_URL,
+          "homologation" => PROTECTED_CARD_HOMOLOGATION_URL
         }
       }
     end
