@@ -120,6 +120,46 @@ describe Braspag::Connection do
     its(:protected_card_url) { should == protected_card_url }
   end
 
+  describe "#production?" do
+    it "should return true when environment is production" do
+      braspag_config[ENV["BRASPAG_ENV"]]["environment"] = "production"
+
+      YAML.should_receive(:load_file)
+          .and_return(braspag_config)
+
+      Braspag::Connection.clone.instance.production?.should be_true
+    end
+
+    it "should return false when environment is not production" do
+      braspag_config[ENV["BRASPAG_ENV"]]["environment"] = "homologation"
+
+      YAML.should_receive(:load_file)
+          .and_return(braspag_config)
+
+      Braspag::Connection.clone.instance.production?.should be_false
+    end
+  end
+
+  describe "#homologation?" do
+    it "should return true when environment is homologation" do
+      braspag_config[ENV["BRASPAG_ENV"]]["environment"] = "homologation"
+
+      YAML.should_receive(:load_file)
+          .and_return(braspag_config)
+
+      Braspag::Connection.clone.instance.homologation?.should be_true
+    end
+
+    it "should return false when environment is not homologation" do
+      braspag_config[ENV["BRASPAG_ENV"]]["environment"] = "production"
+
+      YAML.should_receive(:load_file)
+          .and_return(braspag_config)
+
+      Braspag::Connection.clone.instance.homologation?.should be_false
+     end
+  end
+
   describe "#braspag_url" do
     context "when environment is homologation" do
       it "should return the Braspag homologation url" do

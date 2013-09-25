@@ -38,5 +38,13 @@ module Braspag
         }
       }
     end
+
+    def production?
+      @environment == 'production'
+    end
+
+    def homologation?
+      @environment == 'homologation'
+    end
   end
 end
