@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'httpi', '>= 0.9.6'
   s.add_dependency 'json', '>= 1.6.1'
-  s.add_dependency 'nokogiri', '>= 1.4.7'
+  s.add_dependency 'nokogiri', '~> 1.6.1'
   s.add_dependency 'savon', '~> 2.3.2'
 
   s.add_development_dependency "rake"
