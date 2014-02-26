@@ -18,6 +18,7 @@ module Braspag
       :amex_sitef               => 58,  # Amex SITEF
       :aura_dtef                => 37,  # Aura DTEF
       :redecard_sitef           => 44,  # Redecard SITEF - Mastercard/Diners
+      :amex_cielo               => 180,
       # MÉXICO
       :mex_amex_2p            => 45, # American Express 2 Party
       :mex_banorte_visa       => 50, # Banorte Visa
