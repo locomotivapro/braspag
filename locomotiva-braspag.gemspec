@@ -1,17 +1,17 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "baby-braspag/version"
+require "locomotiva-braspag/version"
 
 Gem::Specification.new do |s|
-  s.name        = "baby-braspag"
+  s.name        = "locomotiva-braspag"
   s.version     = Braspag::VERSION
-  s.authors     = ["baby dev"]
-  s.email       = %w["dev-team@baby.com.br"]
-  s.homepage    = "https://github.com/Baby-com-br/braspag"
-  s.summary     = "baby braspag gem to use Braspag gateway"
-  s.description = "baby braspag gem to use Braspag gateway"
+  s.authors     = ["Locomotiva.pro"]
+  s.email       = %w["contato@locomotiva.pro"]
+  s.homepage    = "https://github.com/locomotivapro/braspag"
+  s.summary     = "Locomotiva.pro braspag gem to use Braspag gateway"
+  s.description = "Locomotiva.pro braspag gem to use Braspag gateway"
 
-  s.rubyforge_project = "baby-braspag"
+  s.rubyforge_project = "locomotiva-braspag"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

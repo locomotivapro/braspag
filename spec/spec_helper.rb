@@ -4,7 +4,7 @@ Bundler.setup(:default)
 require 'httpi'
 require 'nokogiri'
 require 'json'
-require 'baby-braspag'
+require 'locomotiva-braspag'
 
 require 'fakeweb'
 

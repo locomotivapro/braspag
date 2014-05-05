@@ -1,6 +1,6 @@
-# Baby Braspag
+# Locomotiva.pro Braspag
 
-baby-braspag gem to use Braspag gateway
+locomotiva-braspag gem to use Braspag gateway
 
 * This gem need RACK_ENV environment variable to identify the environment
 
@@ -10,7 +10,7 @@ baby-braspag gem to use Braspag gateway
 
 ### Add on your Gemfile
 
-	gem "baby-braspag"
+	gem "locomotiva-braspag"
 
 ### Create a config/braspag.yml file
 
@@ -57,4 +57,3 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
