@@ -11,7 +11,11 @@ module Braspag
       :real => "10",
       :citibank => "13",
       :itau => "14",
-      :unibanco => "26"
+      :unibanco => "26",
+      :bank_boston => "33",
+      :brb => "38",
+      :safra => "40",
+      :santander => "124"
     }
 
     MAPPING = {
