@@ -163,7 +163,7 @@ module Braspag
         raise InvalidExpirationDate
       end
 
-      raise InvalidSecurityCode if params[:security_code].to_s.size < 1 || params[:security_code].to_s.size > 4
+      raise InvalidSecurityCode if params[:security_code].to_s.size < 1 || params[:security_code].to_s.size > 7
 
       raise InvalidNumberPayments if params[:number_payments].to_i < 1 || params[:number_payments].to_i > 99
     end
